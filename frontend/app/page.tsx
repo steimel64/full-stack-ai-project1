@@ -33,21 +33,65 @@ const Home = () => {
   };
 
   return (
-    <div>
-      <h1>LLM Chatbot</h1>
+    <div className="flex flex-col gap-2 relative h-[100vh]">
+      <h1 className="text-3xl font-bold text-left">Chat with Llama</h1>
       <div>
         {messages.map((message, index) => (
           <div key={index} className={message.isBot ? 'bot-message' : 'user-message'}>
-            {message.text}
+            <div className="chat chat-start chat-top">
+              {message.isBot ? (
+                <>
+                  <div className="chat-header">
+                  Llama AI
+                  </div>
+                  <div className="chat-image avatar">
+                    <div className="w-20 rounded-full">
+                      <img
+                        alt="Llama AI"
+                        src="https://img-cdn.inc.com/image/upload/f_webp,c_fit,w_1920,q_auto/images/panoramic/meta-llama3-inc_539927_dhgoal.jpg" />
+                    </div>
+                  </div>
+                  <div className="chat-bubble"> {message.text}.</div>
+                </>
+              ) : (
+                <>
+                  <div className="chat-header">
+                  User
+                  </div>
+                  <div className="chat-image avatar">
+                    <div className="w-20 rounded-full">
+                      <img
+                        alt="User"
+                        src="https://media.istockphoto.com/id/157030584/vector/thumb-up-emoticon.jpg?s=612x612&w=0&k=20&c=GGl4NM_6_BzvJxLSl7uCDF4Vlo_zHGZVmmqOBIewgKg=" />
+                    </div>
+                  </div>
+                  <div className="chat-bubble"> {message.text}.</div>
+                </>
+              )}
+            </div>
           </div>
         ))}
       </div>
-      <form onSubmit={handleSubmit}>
-        <input type="text" value={prompt} onChange={handleInputChange} />
-        <button type="submit" disabled={isLoading}>Send</button>
-      </form>
-    </div>
+
+<div className="join">
+<form onSubmit={handleSubmit}>
+<div>
+    <input
+      type="text"
+      value={prompt}
+      onChange={handleInputChange}
+      placeholder="Type here"
+      className="input input-bordered input-accent w-full max-w-xs" />
+  </div>
+  <div>  
+    <button className="btn btn-outline btn-primary" type="submit" disabled={isLoading}>Send</button>
+  </div>
+</form>
+</div>
+</div>
   );
 };
 
 export default Home;
+
+Date.now()
