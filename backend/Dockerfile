@@ -18,7 +18,7 @@ RUN curl -fsSL https://ollama.com/install.sh | sh
 
 RUN ollama start & \
     sleep 5 && \
-    ollama run llama3.2:1b && \
+    ollama run deepseek-r1:671b && \
     kill $(pgrep ollama)
 
 ADD ./app /app
