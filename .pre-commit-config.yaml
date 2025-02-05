@@ -1,0 +1,17 @@
+
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.9.3
+    hooks:
+      - id: ruff
+        types_or: [python, pyi]
+        args: [--fix,
+               --config, backend/app/pyproject.toml]
+  - repo: local
+    hooks: 
+      - id: husky-run-pre-commit
+        name: husky
+        language: system
+        entry: bash frontend/.husky/pre-commit
+        pass_filenames: false
+        always_run: true

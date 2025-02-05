@@ -1,0 +1,15 @@
+cd ./frontend
+
+# Check for lint errors
+npm run lint || (
+    npm run lint:fix
+    echo "Lint errors were auto-fixed. Please commit again."
+    exit 1
+)
+
+npm run prettier:check || (
+    npm run prettier:format
+    echo "Prettier errors were found. Please run 'npm run prettier:format' and commit again."
+    exit 1
+)
+
