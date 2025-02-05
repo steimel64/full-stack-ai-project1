@@ -3,19 +3,280 @@
 @tailwind utilities;
 
 :root {
-    --background: #ffffff;
-    --foreground: #171717;
+    --background: #121212; /* Dark background for a futuristic look */
+    --foreground: #e0e0e0; /* Light text color */
+    --primary: #00bcd4; /* Bright cyan for primary elements */
+    --primary-dark: #0097a7; /* Darker cyan for hover effects */
+    --secondary: #ff4081; /* Bright pink for accents */
+    --light-bg: #1e1e1e; /* Slightly lighter background */
+    --border-color: rgba(255, 255, 255, 0.1); /* Subtle border color */
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
         --background: #0a0a0a;
-        --foreground: #ededed;
+        --foreground: #ffffff; /* White text for better contrast */
+        --primary: #00bcd4; /* Bright cyan for dark mode */
+        --primary-dark: #0097a7; /* Darker cyan for dark mode */
+        --light-bg: #1e1e1e; /* Dark background */
+        --border-color: rgba(255, 255, 255, 0.2); /* Slightly brighter border for dark mode */
     }
 }
 
 body {
     color: var(--foreground);
-    background: var(--background);
-    font-family: Arial, Helvetica, sans-serif;
+    background: var(--background); /* Ensure body background is dark */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font */
+}
+
+/* Main Layout */
+.main-layout {
+    display: flex; /* Use flexbox for layout */
+    height: 100vh; /* Full height of the viewport */
+    width: 100vw; /* Full width of the viewport */
+}
+
+/* Chat Container */
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%; /* Set to full width */
+    margin: 0; /* Remove margin */
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--light-bg);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Centering the Title */
+.chat-container h1 {
+    text-align: center; /* Center the text horizontally */
+    margin: 10px 0; /* Add some margin for spacing */
+    font-size: 24px; /* Adjust font size if needed */
+}
+
+/* Chat Messages Container */
+.chat-messages {
+    flex: 1; /* Allow this section to grow */
+    overflow-y: auto; /* Enable vertical scrolling */
+    padding: 10px; /* Add some padding */
+}
+
+/* Message Bubbles */
+.message {
+    padding: 12px 18px;
+    border-radius: 20px;
+    margin: 5px;
+    max-width: 80%;
+    transition: all 0.3s ease;
+}
+
+.message.user {
+    background: linear-gradient(135deg, #00bcd4, #ff4081); /* Futuristic gradient */
+    color: white; /* Ensure text color is white */
+    align-self: flex-end;
+    box-shadow: 
+        0 4px 20px rgba(0, 188, 212, 0.5), /* Outer glow */
+        0 0 10px rgba(255, 64, 129, 0.7), /* Inner glow */
+        0 0 15px rgba(255, 64, 129, 0.5); /* Additional glow for emphasis */
+    border: 2px solid rgba(255, 255, 255, 0.2); /* Optional: border to enhance the look */
+}
+
+.message.bot {
+    background-color: var(--light-bg);
+    color: black;
+    align-self: flex-start;
+    box-shadow: 0 2px 10px rgba(225, 225, 225, 0.5);
+}
+
+/* Input Field with Icons */
+.join {
+    width: 100%; /* Make the join div full width */
+    padding: 10px; /* Add padding for spacing */
+    background-color: var(--light-bg); /* Match the background */
+    border-top: 1px solid var(--border-color); /* Optional: border for separation */
+}
+
+.input-container {
+    display: flex;
+    padding: 10px; /* Add padding for the input container */
+    border-radius: 20px;
+    width: 98vw; /* Make the input container full width */
+}
+
+.input-container input {
+    flex: 1; /* Allow the input field to grow */
+    padding: 12px 20px; /* Increased padding for a larger input */
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    margin-right: 10px; /* Space between input and button */
+    transition: border-color 0.3s, box-shadow 0.3s;
+    font-size: 16px; /* Increase font size for better readability */
+    width: 100%; /* Ensure the input box is full width */
+}
+
+.input-container input:focus {
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 188, 212, 0.5); /* Glow effect on focus */
+}
+
+.input-container input::placeholder {
+    color: #aaa;
+    font-style: italic;
+}
+
+/* Send Button */
+.input-container button {
+    padding: 12px 24px; /* Increased padding for a larger button */
+    border: none;
+    border-radius: 20px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark)); /* Gradient background */
+    color: white; /* Light mode text color */
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s; /* Added box-shadow transition */
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3); /* Subtle shadow for depth */
+    font-size: 16px; /* Increase font size for better readability */
+    flex-shrink: 0; /* Prevent the button from shrinking */
+    width: auto; /* Allow button to size based on content */
+}
+
+/* Dark mode styles */
+@media (prefers-color-scheme: dark) {
+    .input-container button {
+        background: linear-gradient(135deg, #1e3a8a, #1e40af); /* Dark mode gradient */
+        color: #ffffff; /* Button text color for dark mode */
+    }
+
+    .input-container button:hover {
+        background: linear-gradient(135deg, #1c7ed6, #1a6bbd); /* Dark mode hover gradient */
+        box-shadow: 0 6px 12px rgba(0, 86, 179, 0.5); /* Dark mode shadow */
+    }
+}
+
+.input-container button:hover {
+    transform: scale(1.05); /* Scale effect on hover */
+}
+
+.input-container button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Chat Section Container */
+.chat-section {
+    background-color: var(--light-bg); /* Ensure chat section background matches */
+    border-radius: 12px; /* Rounded corners */
+    padding: 20px; /* Padding around the content */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); /* Subtle shadow */
+    margin-bottom: 20px; /* Space below the chat section */
+}
+
+/* Dark mode styles for chat section */
+@media (prefers-color-scheme: dark) {
+    .chat-section {
+        background-color: var(--dark-bg); /* Dark background for dark mode */
+        color: #ffffff; /* Light text color for better contrast */
+    }
+
+    .chat-bubble {
+        background-color: #2a2a2a; /* Darker bubble for bot messages */
+        color: #ffffff; /* Light text color for bot messages */
+    }
+
+    .input-container {
+        background-color: #2a2a2a; /* Dark background for input area */
+        border: 1px solid #444; /* Darker border for input */
+    }
+
+    .input-container input {
+        background-color: #2a2a2a; /* Dark background for input field */
+        color: #ffffff; /* Light text color for input */
+    }
+
+    .input-container input::placeholder {
+        color: #aaa; /* Placeholder color for dark mode */
+    }
+
+    .input-container button {
+        background-color: var(--primary); /* Button background for dark mode */
+        color: #ffffff; /* Button text color for dark mode */
+    }
+
+    .input-container button:hover {
+        background-color: var(--primary-dark); /* Dark mode hover color */
+    }
+}
+
+/* Typing Indicator */
+.typing-indicator {
+    display: flex;
+    align-items: center;
+    margin: 5px 0; /* Adjust margin for better spacing */
+}
+
+.typing-indicator .dot {
+    height: 8px;
+    width: 8px;
+    margin: 0 3px;
+    border-radius: 50%;
+    background-color: var(--primary);
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 20% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Smooth Scroll */
+.chat-container {
+    overflow-y: auto;
+    scroll-behavior: smooth;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .chat-container {
+        width: 100%;
+    }
+}
+
+.prompt-buttons {
+    display: flex;
+    flex-direction: column; /* Stack buttons vertically */
+    align-items: center; /* Center buttons */
+    margin: 10px 0; /* Add some margin for spacing */
+}
+
+.button-grid {
+    display: flex;
+    flex-wrap: wrap; /* Allow buttons to wrap */
+    justify-content: center; /* Center buttons */
+    width: 100%; /* Full width for the button grid */
+}
+
+.button-grid button {
+    flex: 0 0 45%; /* Set buttons to take up 45% of the width */
+    margin: 5px; /* Add margin between buttons */
+    padding: 10px 15px; /* Add padding for buttons */
+    border: none;
+    border-radius: 8px; /* More rounded corners */
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary)); /* Darker gradient */
+    color: white; /* Text color */
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s; /* Smooth transition */
+}
+
+.button-grid button:hover {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark)); /* Darker shade on hover */
+    transform: scale(1.05); /* Slightly enlarge on hover */
 }
