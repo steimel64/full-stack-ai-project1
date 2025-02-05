@@ -7,7 +7,7 @@ from loguru import logger
 
 # Model for the API input
 class PromptRequest(BaseModel):
-    model: str = "deepseek-r1:671b" # Default model
+    model: str = "deepseek-r1:1.5b" # Default model
     prompt: str
 
 # Initiate FastAPI
@@ -77,7 +77,7 @@ async def generate_text(request: PromptRequest) -> dict:
     Returns:
         dict: A dictionary containing the generated text under the key "text".
     """
-    model = request.model
+    model = "deepseek-r1:1.5b"
     prompt = request.prompt
 
     logger.info(f"Generating Text with Model: {model} and Prompt: {prompt}")
