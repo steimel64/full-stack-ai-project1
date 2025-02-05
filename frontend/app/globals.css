@@ -102,6 +102,7 @@ body {
     display: flex;
     padding: 10px; /* Add padding for the input container */
     border-radius: 20px;
+    height: 10vh;
     width: 98vw; /* Make the input container full width */
 }
 
