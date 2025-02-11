@@ -1,27 +1,25 @@
 # Instructions 
 
-## Backend 
-CD into backend folder
+## Initial Setup 
+Git Clone the repo, in terminal run:
+```git clone https://github.com/steimel64/fullstack-ds-deepseek-fastapi-nextjs.git```
 
-Building the container 
-```sh docker build  -t fastapi-docker ./```
+## Backend Setup 
 
-Running the container 
-```sh docker run -p 8000:8000 fastapi-docker```
-
+## FrontEnd Setup
 
 
-## Front end
-CD into front end folder
 
-Building the container 
-```sh docker build --no-cache -t nextjs-docker ./```
+## Tools 
+```uv tool install ruff```
+```uv tool install pre-commit```
 
+## Build Containers
+Run the following command 
+```docker-compose build```
 
-Running the container 
-```sh docker run nextjs-docker```
-
-
-## Docker Compose both containers 
+## Run Application 
 Run the following command 
 ```docker-compose up```
+
+After the containers start, go to [localhost:3000](http://localhost:3000/) to see the app. 
