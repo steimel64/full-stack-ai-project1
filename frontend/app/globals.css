@@ -184,6 +184,7 @@ body {
     .chat-bubble {
         background-color: #2a2a2a; /* Darker bubble for bot messages */
         color: #ffffff; /* Light text color for bot messages */
+        white-space: pre-wrap;
     }
 
     .input-container {
