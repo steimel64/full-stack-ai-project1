@@ -9,7 +9,18 @@ const Home = () => {
     const [messages, setMessages] = useState<{ text: string; isBot?: boolean }[]>([]);
     const [isTyping, setIsTyping] = useState(false);
 
-    const formatResponse = (response: string) => response?.replace(prompt, '') || '';
+    const formatResponse = (response: string) => {
+        const emojiMapping: { [key: string]: string } = {
+            '<think>': '🤔',  // Thinking emoji
+            '</think>': '💭',  // Thought bubble emoji
+            // Add more mappings here as needed
+        };
+
+        // Replace each key in the mapping with its corresponding emoji
+        return Object.keys(emojiMapping).reduce((formattedResponse, key) => {
+            return formattedResponse.replace(new RegExp(key, 'g'), emojiMapping[key]);
+        }, response?.replace(prompt, '') || '');
+    };
 
     const sendMessage = async () => {
         setIsLoading(true);
